@@ -4,20 +4,22 @@ import java.sql.Date;
 
 public class Registro {
 
-    private String id_empleado, cons, id_actividad, usuario_creador, estado;
+    private String id_empleado, cons, id_actividad, usuario_creador, estado, empresa, nombre;
     private Date fecha;
 
     public Registro() {
 
     }
 
-    public Registro(String id_empleado, String cons, String id_actividad, String usuario_creador, String estado, Date fecha) {
+    public Registro(String id_empleado, String cons, String id_actividad, String usuario_creador, String estado, Date fecha, String empresa, String nombre) {
         this.id_empleado = id_empleado;
         this.cons = cons;
         this.id_actividad = id_actividad;
         this.fecha = fecha;
         this.usuario_creador = usuario_creador;
         this.estado = estado;
+        this.empresa = empresa;
+        this.nombre = nombre;
     }
 
     public String getId_empleado() {
@@ -72,4 +74,21 @@ public class Registro {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
 }

@@ -25,7 +25,6 @@ public class Dao_Cargo {
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));
-                
             }
         } catch (Exception e) {
         } finally {
@@ -37,7 +36,7 @@ public class Dao_Cargo {
         return u;
     }
 
-    public String getGuardarCargo(Connection c, Integer car, String nom, String sal, String est) {
+    public String getGuardarCargo(Connection c, Integer car, String nom, String sal, String est, Integer emp) {
 
         String res = "";
         try {
@@ -46,6 +45,7 @@ public class Dao_Cargo {
             stm.setString(2, nom);
             stm.setString(3, sal);
             stm.setString(4, est);
+            stm.setInt(5, emp);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
                 res = "Cargo " + nom + " añadido";
@@ -68,7 +68,7 @@ public class Dao_Cargo {
         return res;
     }
 
-    public String getEditarCargo(Connection c, Integer car, String nom, String sal, String est) {
+    public String getEditarCargo(Connection c, Integer car, String nom, String sal, String est, Integer emp) {
 
         String res = "";
         try {
@@ -77,6 +77,7 @@ public class Dao_Cargo {
             stm.setString(1, nom);
             stm.setString(2, sal);
             stm.setString(3, est);
+            stm.setInt(5, emp);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
                 res = "Cargo " + nom + " actualizado";
@@ -105,6 +106,7 @@ public class Dao_Cargo {
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));
+                u.setEmpresa(r.getString(5));
 
                 Listado.add(u);
 
@@ -130,7 +132,7 @@ public class Dao_Cargo {
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));
-
+                u.setEmpresa(r.getString(5));
                 Listado.add(u);
 
             }
@@ -144,10 +146,10 @@ public class Dao_Cargo {
         return Listado;
     }
     
-    public Cargo getEliminarCargo(Connection c, Integer idcargo) {
+    public Cargo getEliminarCargo(Connection c, Integer idCargo, Integer idEmpleado) {
         Cargo u = new Cargo();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarCargo(idcargo));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarCargo(idCargo, idEmpleado));
             smt.executeUpdate();
         } catch (Exception e) {
         } finally {

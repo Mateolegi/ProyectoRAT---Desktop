@@ -7,14 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class Dao_Usuario {
 
-    public Usuario getUsuario(Connection c, String idusuario) {
+    public Usuario getUsuario(Connection c, String idUsuario, Integer idEmpresa) {
         Usuario u = new Usuario();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getUsuario(idusuario));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getUsuario(idUsuario, idEmpresa));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
                 u.setUsuario(r.getString(1));
@@ -60,7 +59,7 @@ public class Dao_Usuario {
         return u;
     }
 
-    public String getGuardarUsuario(Connection c, String usu, String nom, String cla, String est, String per, String corr) {
+    public String getGuardarUsuario(Connection c, String usu, String nom, String cla, String est, String per, String corr, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -71,18 +70,19 @@ public class Dao_Usuario {
             stm.setString(4, est);
             stm.setString(5, per);
             stm.setString(6, corr);
+            stm.setInt(7, idEmpresa);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Usuario " + usu + "añadido");
+                res = "Usuario " + usu + "añadido";
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario " + usu + " no añadido", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Usuario " + usu + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
             
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
-                JOptionPane.showMessageDialog(null, "El usuario " + usu + "ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "El usuario " + usu + "ya existe.";
             }
         } finally {
             try {
@@ -93,7 +93,7 @@ public class Dao_Usuario {
         return res;
     }
 
-    public String getEditarUsuario(Connection c, String usu, String nom, String cla, String est, String per, String corr) {
+    public String getEditarUsuario(Connection c, String usu, String nom, String cla, String est, String per, String corr, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -104,18 +104,19 @@ public class Dao_Usuario {
             stm.setString(3, est);
             stm.setString(4, per);
             stm.setString(5, corr);
+            stm.setInt(7, idEmpresa);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Usuario " + usu + "actualizado");
+                res = "Usuario " + usu + "actualizado";
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario " + usu + " no actualizado", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Usuario " + usu + " no actualizado";
             }
         } catch (SQLException | HeadlessException e) {
         } finally {
             try {
                 c.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getCause(), "Error", JOptionPane.ERROR_MESSAGE);
+                res = "" + e.getCause();
             }
         }
         return res;
@@ -134,7 +135,7 @@ public class Dao_Usuario {
                 u.setEstado(r.getString(4));
                 u.setPerfil(r.getString(5));
                 u.setEmail(r.getString(6));
-
+                u.setEmpresa(r.getString(7));
                 Listado.add(u);
 
             }
@@ -161,7 +162,7 @@ public class Dao_Usuario {
                 u.setEstado(r.getString(4));
                 u.setPerfil(r.getString(5));
                 u.setEmail(r.getString(6));
-
+                u.setEmpresa(r.getString(7));
                 Listado.add(u);
 
             }
@@ -175,10 +176,10 @@ public class Dao_Usuario {
         return Listado;
     }
     
-    public Usuario getEliminarUsuario(Connection c, String usuario) {
+    public Usuario getEliminarUsuario(Connection c, String usuario, Integer idEmpresa) {
         Usuario u = new Usuario();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarUsuario(usuario));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarUsuario(usuario, idEmpresa));
             smt.executeUpdate();
         } catch (Exception e) {
         } finally {

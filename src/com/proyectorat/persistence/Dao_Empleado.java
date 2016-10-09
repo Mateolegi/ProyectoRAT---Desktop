@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,22 +18,22 @@ import javax.swing.JOptionPane;
  */
 public class Dao_Empleado {
 
-    public Empleado getEmpleado(Connection c, Integer idempleado) {
+    public Empleado getEmpleado(Connection c, Integer idEmpleado, Integer idEmpresa) {
         Empleado u = new Empleado();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEmpleado(idempleado));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEmpleado(idEmpleado, idEmpresa));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
                 u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getString(4));
+                u.setFecha_n(r.getDate(4));
                 u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
                 u.setId_cargo(r.getString(9));
-                
+                u.setEmpresa(r.getString(10));
             }
         } catch (Exception e) {
         } finally {
@@ -46,7 +45,7 @@ public class Dao_Empleado {
         return u;
     }
 
-    public String getGuardarEmpleado(Connection c, Integer emp, String nom, String ape, Date fec, Integer tel, String dir, String cor, String est, Integer car) {
+    public String getGuardarEmpleado(Connection c, Integer emp, String nom, String ape, Date fec, Integer tel, String dir, String cor, String est, Integer car, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -60,6 +59,7 @@ public class Dao_Empleado {
             stm.setString(7, cor);
             stm.setString(8, est);
             stm.setInt(9, car);
+            stm.setInt(10, idEmpresa);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
                 res = "Empleado " + emp + " añadido";
@@ -82,7 +82,7 @@ public class Dao_Empleado {
         return res;
     }
 
-    public String getEditarEmpleado(Connection c, Integer emp, String nom, String ape, Date fec, Integer tel, String dir, String cor, String est, Integer car) {
+    public String getEditarEmpleado(Connection c, Integer emp, String nom, String ape, Date fec, Integer tel, String dir, String cor, String est, Integer car, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -98,6 +98,7 @@ public class Dao_Empleado {
             stm.setString(6, dir);
             stm.setString(7, cor);
             stm.setString(8, est);
+            stm.setInt(10, idEmpresa);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
                 res = "Empleado " + emp + " actualizado";
@@ -127,13 +128,13 @@ public class Dao_Empleado {
                 u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getString(4));
+                u.setFecha_n(r.getDate(4));
                 u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
                 u.setId_cargo(r.getString(9));
-
+                u.setEmpresa(r.getString(10));
                 Listado.add(u);
 
             }
@@ -157,13 +158,13 @@ public class Dao_Empleado {
                 u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getString(4));
+                u.setFecha_n(r.getDate(4));
                 u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
                 u.setId_cargo(r.getString(9));
-
+                u.setEmpresa(r.getString(10));
                 Listado.add(u);
 
             }
@@ -177,10 +178,10 @@ public class Dao_Empleado {
         return Listado;
     }
     
-    public Empleado getEliminarEmpleado(Connection c, Integer idempleado) {
+    public Empleado getEliminarEmpleado(Connection c, Integer idEmpleado, Integer idEmpresa) {
         Empleado u = new Empleado();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarEmpleado(idempleado));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarEmpleado(idEmpleado, idEmpresa));
             smt.executeUpdate();
         } catch (Exception e) {
         } finally {

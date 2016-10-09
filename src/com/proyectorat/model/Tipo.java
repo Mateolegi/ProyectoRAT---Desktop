@@ -2,16 +2,18 @@ package com.proyectorat.model;
 
 public class Tipo {
 
-    private String id_actividad, descripcion, estado;
+    private String id_actividad, actividad, descripcion, estado, empresa;
 
     public Tipo() {
 
     }
 
-    public Tipo(String id_actividad, String descripcion, String estado) {
+    public Tipo(String id_actividad, String actividad, String descripcion, String estado, String empresa) {
         this.id_actividad = id_actividad;
+        this.actividad = actividad;
         this.descripcion = descripcion;
         this.estado = estado;
+        this.empresa = empresa;
     }
 
     public String getId_actividad() {
@@ -38,4 +40,21 @@ public class Tipo {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(String actividad) {
+        this.actividad = actividad;
+    }
+    
 }

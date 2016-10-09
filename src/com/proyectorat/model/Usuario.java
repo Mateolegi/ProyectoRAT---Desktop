@@ -2,19 +2,20 @@ package com.proyectorat.model;
 
 public class Usuario {
 
-    private String usuario, nombre, clave, perfil, estado, email;
+    private String usuario, nombre, clave, perfil, estado, email, empresa;
 
     public Usuario() {
 
     }
 
-    public Usuario(String usuario, String nombre, String clave, String perfil, String estado, String email) {
+    public Usuario(String usuario, String nombre, String clave, String perfil, String estado, String email, String empresa) {
         this.usuario = usuario;
         this.nombre = nombre;
         this.clave = clave;
         this.perfil = perfil;
         this.estado = estado;
         this.email = email;
+        this.empresa = empresa;
     }
 
     public String getUsuario() {
@@ -64,4 +65,13 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+    
 }

@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,17 +18,17 @@ import javax.swing.JOptionPane;
  */
 public class Dao_Registro {
 
-    public Registro getRegistro(Connection c, Integer idempleado) {
+    public Registro getRegistro(Connection c, Integer idEmpleado, Integer idEmpresa) {
         Registro u = new Registro();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getRegistroA_E(idempleado));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getRegistroA_E(idEmpleado, idEmpresa));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
                 u.setId_empleado(r.getString(1));
                 u.setCons(r.getString(2));
                 u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getString(5));
+                u.setFecha(r.getDate(5));
                 u.setEstado(r.getString(6));
                 
             }
@@ -61,7 +60,7 @@ public class Dao_Registro {
         return u;
     }
     
-    public String getGuardarRegistro(Connection c, int emp, int con, int act, String usu, Date fec, String est) {
+    public String getGuardarRegistro(Connection c, Integer emp, Integer con, Integer act, String usu, Date fec, String est, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -72,6 +71,7 @@ public class Dao_Registro {
             stm.setString(4, usu);
             stm.setDate(5, fec);
             stm.setString(6, est);
+            stm.setInt(7, idEmpresa);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
                 res = "Registro " + act + "añadido";
@@ -94,7 +94,7 @@ public class Dao_Registro {
         return res;
     }
 
-    public String getEditarRegistro(Connection c, int emp, int con, int act, String usu, Date fec, String est) {
+    public String getEditarRegistro(Connection c, int emp, int con, int act, String usu, Date fec, String est, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -105,6 +105,7 @@ public class Dao_Registro {
             stm.setString(3, usu);
             stm.setDate(4, fec);
             stm.setString(5, est);
+            stm.setInt(7, idEmpresa);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
                 res = "Registro " + con + "actualizado";
@@ -129,13 +130,13 @@ public class Dao_Registro {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Registro u = new Registro();
-                u.setId_empleado(r.getString(1));
-                u.setCons(r.getString(2));
+                u.setCons(r.getString(1));
+                u.setNombre(r.getString(2));
                 u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getString(5));
+                u.setFecha(r.getDate(5));
                 u.setEstado(r.getString(6));
-
+                u.setEmpresa(r.getString(7));
                 Listado.add(u);
 
             }
@@ -160,9 +161,9 @@ public class Dao_Registro {
                 u.setCons(r.getString(2));
                 u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getString(5));
+                u.setFecha(r.getDate(5));
                 u.setEstado(r.getString(6));
-
+                u.setEmpresa(r.getString(7));
                 Listado.add(u);
 
             }
@@ -176,10 +177,10 @@ public class Dao_Registro {
         return Listado;
     }
     
-    public Registro getEliminarRegistro(Connection c, Integer idempleado) {
+    public Registro getEliminarRegistro(Connection c, Integer idEmpleado, Integer idEmpresa) {
         Registro u = new Registro();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarRegistroA(idempleado));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarRegistroA(idEmpleado, idEmpresa));
             smt.executeUpdate();
         } catch (Exception e) {
         } finally {

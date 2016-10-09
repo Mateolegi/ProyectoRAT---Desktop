@@ -77,7 +77,7 @@ public class SQL_Helpers {
 
     //EMPLEADO
     public static String getEmpleado() {
-        return "SELECT em.id_empleado, CONCAT(em.nombre, ' ', em.apellidos) nombre, em.fecha_n, em.telefono, em.direccion, em.email, em.estado, pe.cargo, ep.nombre FROM tblempleado em INNER JOIN tblcargo pe ON em.id_cargo = pe.id_cargo INNER JOIN tblempresa ep ON em.id_empresa = ep.id_empresa GROUP BY em.id_empleado, pe.id_cargo, ep.nombre";
+        return "SELECT em.id_empleado, em.nombre, em.apellidos, em.fecha_n, em.telefono, em.direccion, em.email, em.estado, pe.cargo, ep.nombre FROM tblempleado em INNER JOIN tblcargo pe ON em.id_cargo = pe.id_cargo INNER JOIN tblempresa ep ON em.id_empresa = ep.id_empresa GROUP BY em.id_empleado, pe.id_cargo, ep.nombre";
     }
 
     public static String getEmpleado(Integer id, Integer idEmpresa) {
@@ -169,7 +169,7 @@ public class SQL_Helpers {
     
     //REGISTROA
     public static String getRegistroA() {
-        return "SELECT ac.cons, CONCAT(em.nombre, ' ', em.apellidos) nombre, ti.descripcion, us.usuario, ac.fecha_actividad, ac.estado, ep.nombre FROM tblregistro_actividades ac INNER JOIN tblempleado em ON ac.id_empleado = em.id_empleado INNER JOIN tbltipo_actividad ti ON ac.id_actividad = ti.id_actividad INNER JOIN tblusuario us ON us.usuario = ac.usuario_creador INNER JOIN tblempresa ep ON ac.id_empresa = ep.id_empresa GROUP BY em.nombre, ti.descripcion, us.usuario, ac.fecha_actividad, ep.nombre";
+        return "SELECT ac.cons, CONCAT(em.nombre, ' ', em.apellidos) nombre, ti.actividad, us.usuario, ac.fecha_actividad, ac.estado, ep.nombre FROM tblregistro_actividades ac INNER JOIN tblempleado em ON ac.id_empleado = em.id_empleado INNER JOIN tbltipo_actividad ti ON ac.id_actividad = ti.id_actividad INNER JOIN tblusuario us ON us.usuario = ac.usuario_creador INNER JOIN tblempresa ep ON ac.id_empresa = ep.id_empresa GROUP BY em.nombre, ti.descripcion, us.usuario, ac.fecha_actividad, ep.nombre";
     }
 
     public static String getRegistroA_E(Integer id, Integer idEmpresa) {

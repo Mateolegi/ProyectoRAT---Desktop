@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Dao_Tipo {
 
-    public Tipo getTipoA(Connection c, Integer idactividad) {
+    public Tipo getTipoA(Connection c, Integer idActividad, Integer idEmpresa) {
         Tipo u = new Tipo();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getTipoA(idactividad));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getTipoA(idActividad, idEmpresa));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
                 u.setId_actividad(r.getString(1));
@@ -40,7 +39,7 @@ public class Dao_Tipo {
         return u;
     }
     
-    public String getGuardarTipo(Connection c, int ida, String act, String des, String est) {
+    public String getGuardarTipo(Connection c, Integer ida, String act, String des, String est, Integer idEmpresa) {
         
         String res = "";
         try {
@@ -49,18 +48,19 @@ public class Dao_Tipo {
             stm.setString(2, act);
             stm.setString(3, des);
             stm.setString(4, est);
+            stm.setInt(5, idEmpresa);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Tipo de actividad " + des + " añadido");
+                res = "Tipo de actividad " + des + " añadido";
             } else {
-                JOptionPane.showMessageDialog(null, "Error, tipo de actividad " + des + " no añadido", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Error, tipo de actividad " + des + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
             
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
-                JOptionPane.showMessageDialog(null, "El tipo de actividad " + act + " ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "El tipo de actividad " + act + " ya existe.";
             }
         } finally {
             try {
@@ -71,7 +71,7 @@ public class Dao_Tipo {
         return res;
     }
 
-    public String getEditarTipo(Connection c, int ida, String act, String des, String est) {
+    public String getEditarTipo(Connection c, Integer ida, String act, String des, String est, Integer idEmpresa) {
 
         String res = "";
         try {
@@ -80,14 +80,15 @@ public class Dao_Tipo {
             stm.setString(1, act);
             stm.setString(2, des);
             stm.setString(3, est);
+            stm.setInt(5, idEmpresa);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Tipo de actividad " + des + " actualizado");
+                res = "Tipo de actividad " + des + " actualizado";
             } else {
-                JOptionPane.showMessageDialog(null, "Error, tipo de actividad " + des + " no actualizado", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Error, tipo de actividad " + des + " no actualizado";
             }
         } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e.getCause(), "Error", JOptionPane.ERROR_MESSAGE);
+            res = "" + e.getCause();
         } finally {
             try {
                 c.close();
@@ -108,7 +109,7 @@ public class Dao_Tipo {
                 u.setActividad(r.getString(2));
                 u.setDescripcion(r.getString(3));
                 u.setEstado(r.getString(4));
-
+                u.setEmpresa(r.getString(5));
                 Listado.add(u);
 
             }
@@ -133,7 +134,7 @@ public class Dao_Tipo {
                 u.setActividad(r.getString(2));
                 u.setDescripcion(r.getString(3));
                 u.setEstado(r.getString(4));
-
+                u.setEmpresa(r.getString(5));
                 Listado.add(u);
 
             }
@@ -147,10 +148,10 @@ public class Dao_Tipo {
         return Listado;
     }
     
-    public Tipo getEliminarTipo(Connection c, Integer idactividad) {
+    public Tipo getEliminarTipo(Connection c, Integer idActividad, Integer idEmpresa) {
         Tipo u = new Tipo();
         try {
-            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarTipoA(idactividad));
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarTipoA(idActividad, idEmpresa));
             smt.executeUpdate();
         } catch (Exception e) {
         } finally {
