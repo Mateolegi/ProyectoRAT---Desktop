@@ -1,4 +1,4 @@
-package com.proyectorat.business;
+package com.proyectorat.manager;
 
 import com.proyectorat.model.Usuario;
 import com.proyectorat.persistence.Dao_Usuario;
@@ -19,10 +19,10 @@ public class UsuarioManagerImpl {
         dao = new Dao_Usuario();
     }
 
-    public Usuario getUsuario(String idusuario) {
+    public Usuario getUsuario(String idUsuario, Integer idEmpresa) {
 
         c = new Conexion().getCon();
-        return dao.getUsuario(c, idusuario);
+        return dao.getUsuario(c, idUsuario, idEmpresa);
     }
 
     public ArrayList<Usuario> getListado() {
@@ -32,6 +32,7 @@ public class UsuarioManagerImpl {
     }
 
     public void getGuardarUsuario(Usuario u) throws Exception {
+        Integer idEmpresa;
         String mensaje, usu, nom, cla, per, est, cor;
         usu = u.getUsuario();
         nom = u.getNombre();
@@ -39,8 +40,9 @@ public class UsuarioManagerImpl {
         per = u.getPerfil();
         est = u.getEstado();
         cor = u.getEmail();
+        idEmpresa = Integer.parseInt(u.getEmpresa());
         mensaje = "";
-        
+
         //Campos obligatorios
         if ("".equals(usu) || null == usu) {
             mensaje += "Ingrese usuario";
@@ -50,30 +52,36 @@ public class UsuarioManagerImpl {
         if ("".equals(est) || null == est) {
             est = "Activo";
         }
-        
+
         if ("".equals(nom) || null == nom) {
             mensaje += "Ingrese nombre";
         }
-        
+
         if ("".equals(cla) || null == cla) {
             mensaje += "Ingrese clave";
         }
-        
+
         if ("".equals(per) || null == per) {
             mensaje += "Ingrese perfil";
         }
         
-        //Excepciones
+        if ("".equals(cor) || null == cor) {
+            mensaje += "Ingrese el correo";
+        }
+
+        if (!"".equals(mensaje)) {
+            throw new Exception("Los campos(*):\n " + mensaje + "\nSon obligatorios");
+        }
+        c = new Conexion().getCon();
+        mensaje = dao.getGuardarUsuario(c, usu, nom, cla, est, per, cor, idEmpresa);
+
         if (!"".equals(mensaje)) {
             throw new Exception(mensaje);
         }
-        
-        c= new Conexion().getCon();
-        
-        mensaje = dao.getGuardarUsuario(c, usu, nom, cla, est, per, cor);
     }
-    
+
     public void getEditarUsuario(Usuario u) throws Exception {
+        Integer idEmpresa;
         String mensaje, usu, nom, cla, per, est, cor;
         usu = u.getUsuario();
         nom = u.getNombre();
@@ -81,8 +89,9 @@ public class UsuarioManagerImpl {
         per = u.getPerfil();
         est = u.getEstado();
         cor = u.getEmail();
+        idEmpresa = Integer.parseInt(u.getEmpresa());
         mensaje = "";
-        
+
         //Campos obligatorios
         if ("".equals(usu) || null == usu) {
             mensaje += "Ingrese usuario";
@@ -92,32 +101,33 @@ public class UsuarioManagerImpl {
         if ("".equals(est) || null == est) {
             est = "Activo";
         }
-        
+
         if ("".equals(nom) || null == nom) {
             mensaje += "Ingrese nombre";
         }
-        
+
         if ("".equals(cla) || null == cla) {
             mensaje += "Ingrese clave";
         }
-        
+
         if ("".equals(per) || null == per) {
             mensaje += "Ingrese perfil";
         }
-        
-        //Excepciones
+
+        if (!"".equals(mensaje)) {
+            throw new Exception("Los campos(*):\n " + mensaje + "\nSon obligatorios");
+        }
+        c = new Conexion().getCon();
+        mensaje = dao.getEditarUsuario(c, usu, nom, cla, est, per, cor, idEmpresa);
+
         if (!"".equals(mensaje)) {
             throw new Exception(mensaje);
         }
-        
-        c= new Conexion().getCon();
-        
-        mensaje = dao.getEditarUsuario(c, usu, nom, cla, est, per, cor);
     }
-    
-    public Usuario getEliminarUsuario(String usuario) {
+
+    public Usuario getEliminarUsuario(String usuario, Integer idEmpresa) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarUsuario(c, usuario);
+        return dao.getEliminarUsuario(c, usuario, idEmpresa);
     }
 }

@@ -2,7 +2,7 @@ package com.proyectorat.gui;
 
 //Importación de paquetes
 import com.proyectorat.model.Usuario;
-import com.proyectorat.business.UsuarioManagerImpl;
+import com.proyectorat.manager.UsuarioManagerImpl;
 import com.proyectorat.persistence.SQL_Helpers;
 import com.proyectorat.util.Conexion;
 import javax.swing.*;

@@ -2,7 +2,7 @@ package com.proyectorat.gui;
 
 //Importación de paquetes
 import com.proyectorat.model.Cargo;
-import com.proyectorat.business.CargoManagerImpl;
+import com.proyectorat.manager.CargoManagerImpl;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.regex.*;

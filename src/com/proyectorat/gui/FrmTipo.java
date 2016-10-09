@@ -2,7 +2,7 @@ package com.proyectorat.gui;
 
 //Importación de paquetes
 import com.proyectorat.model.Tipo;
-import com.proyectorat.business.TipoManagerImpl;
+import com.proyectorat.manager.TipoManagerImpl;
 import javax.swing.*;
 import java.awt.event.*;
 

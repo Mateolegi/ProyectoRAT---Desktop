@@ -3,7 +3,7 @@ package com.proyectorat.gui;
 //Importación de paquetes
 import com.toedter.calendar.JDateChooser;
 import com.proyectorat.model.Registro;
-import com.proyectorat.business.RegistroManagerImpl;
+import com.proyectorat.manager.RegistroManagerImpl;
 import static com.proyectorat.gui.FrmIngreso.leerTexto;
 import javax.swing.*;
 import java.awt.event.*;

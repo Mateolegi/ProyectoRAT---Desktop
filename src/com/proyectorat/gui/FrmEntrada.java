@@ -3,7 +3,7 @@ package com.proyectorat.gui;
 //Importación de paquetes
 import com.toedter.calendar.JDateChooser;
 import com.proyectorat.model.Entrada;
-import com.proyectorat.business.EntradaManagerImpl;
+import com.proyectorat.manager.EntradaManagerImpl;
 import com.proyectorat.persistence.SQL_Helpers;
 import com.proyectorat.util.Conexion;
 import java.awt.Color;
