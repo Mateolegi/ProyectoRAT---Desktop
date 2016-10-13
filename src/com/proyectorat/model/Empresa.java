@@ -1,5 +1,5 @@
 package com.proyectorat.model;
-import java.sql.Blob;
+import java.awt.Image;
 /**
  *
  * @author mateo
@@ -8,7 +8,7 @@ public class Empresa {
     
     private String id_empresa;
     private String nombre;
-    private Blob logo;
+    private Image logo;
     private String estado;
 
     public String getId_empresa() {
@@ -27,11 +27,11 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public Blob getLogo() {
+    public Image getLogo() {
         return logo;
     }
 
-    public void setLogo(Blob logo) {
+    public void setLogo(Image logo) {
         this.logo = logo;
     }
 

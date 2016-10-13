@@ -5,6 +5,7 @@ import com.proyectorat.persistence.Dao_Usuario;
 import com.proyectorat.util.Conexion;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,7 +77,7 @@ public class UsuarioManagerImpl {
         mensaje = dao.getGuardarUsuario(c, usu, nom, cla, est, per, cor, idEmpresa);
 
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -121,7 +122,7 @@ public class UsuarioManagerImpl {
         mensaje = dao.getEditarUsuario(c, usu, nom, cla, est, per, cor, idEmpresa);
 
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

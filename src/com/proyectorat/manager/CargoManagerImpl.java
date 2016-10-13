@@ -25,6 +25,12 @@ public class CargoManagerImpl {
         return dao.getCargo(c, idCargo, idEmpresa);
     }
 
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tblcargo", "id_cargo", 4);
+    }
+
     public ArrayList<Cargo> getListado() {
 
         c = new Conexion().getCon();

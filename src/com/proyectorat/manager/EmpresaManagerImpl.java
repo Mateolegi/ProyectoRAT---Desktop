@@ -3,9 +3,10 @@ package com.proyectorat.manager;
 import com.proyectorat.model.Empresa;
 import com.proyectorat.persistence.Dao_Empresa;
 import com.proyectorat.util.Conexion;
-import java.sql.Blob;
+import java.awt.Image;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,12 @@ public class EmpresaManagerImpl {
         return dao.getEmpresa(c, idEmpresa);
     }
 
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tblempresa", "id_empresa", 4);
+    }
+
     public ArrayList<Empresa> getListado() {
 
         c = new Conexion().getCon();
@@ -35,7 +42,7 @@ public class EmpresaManagerImpl {
     public void getGuardarEmpresa(Empresa u) throws Exception {
         String mensaje, nom, est;
         Integer idEmpresa;
-        Blob logo;
+        Image logo;
         idEmpresa = Integer.parseInt(u.getId_empresa());
         nom = u.getNombre();
         logo = u.getLogo();
@@ -62,14 +69,14 @@ public class EmpresaManagerImpl {
         mensaje = dao.getGuardarEmpresa(c, idEmpresa, nom, logo, est);
 
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
     public void getEditarEmpresa(Empresa u) throws Exception {
         String mensaje, nom, est;
         Integer idEmpresa;
-        Blob logo;
+        Image logo;
         idEmpresa = Integer.parseInt(u.getId_empresa());
         nom = u.getNombre();
         logo = u.getLogo();
@@ -96,7 +103,7 @@ public class EmpresaManagerImpl {
         mensaje = dao.getEditarEmpresa(c, idEmpresa, nom, logo, est);
 
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

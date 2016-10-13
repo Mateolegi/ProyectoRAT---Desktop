@@ -36,6 +36,24 @@ public class Dao_Cargo {
         return u;
     }
 
+    public String getCons (Connection c, String tabla, String campo, int Longitud) {
+        String u = "1000";
+        try {
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getConsectivo(tabla, campo, Longitud));
+            ResultSet r = smt.executeQuery();
+            while (r.next()) {
+                u=r.getString(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                c.close();
+            } catch (Exception e) {
+            }
+        }
+        return u;
+    }
+
     public String getGuardarCargo(Connection c, Integer car, String nom, String sal, String est, Integer emp) {
 
         String res = "";

@@ -39,13 +39,14 @@ public class Conexion {
     }
 
     public void ConexionBd() {
-        String host = "localhost";
+        String host = "127.0.0.1";
         String puerto = "3306";
         String mi_db = "db_rat";
         String user = "root";
         String pw = "";
+        String url = "jdbc:mysql://" + host + ":" + puerto + "/" + mi_db + "?autoReconnect=true&useSSL=false";
         try {
-            setCon(DriverManager.getConnection("jdbc:mysql://" + host + ":" + puerto + "/" + mi_db, user, pw));
+            setCon(DriverManager.getConnection(url, user, pw));
             ConEstab = true;
         } catch (SQLException e) {
             System.out.println("SQLException " + e.getMessage());

@@ -1,6 +1,6 @@
 
 
-import com.proyectorat.gui.FrmIngreso;
+import com.proyectorat.view.Main;
 import java.awt.*;
 import java.awt.SplashScreen;
 
@@ -47,7 +47,7 @@ public final class ScreenSplash {
         }
         //una vez terminada la animación se muestra la aplicación principal
         try {
-            new FrmIngreso().setVisible(true);
+            new Main().setVisible(true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

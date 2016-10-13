@@ -26,6 +26,12 @@ public class RegistroManagerImpl {
         return dao.getRegistro(c, idEmpleado, idEmpresa);
     }
 
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tblregistro_actividades", "cons", 4);
+    }
+
     public ArrayList<Registro> getListado() {
 
         c = new Conexion().getCon();

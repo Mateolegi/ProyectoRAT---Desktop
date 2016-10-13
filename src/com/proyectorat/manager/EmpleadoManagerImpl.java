@@ -26,6 +26,12 @@ public class EmpleadoManagerImpl {
         return dao.getEmpleado(c, idEmpleado, idEmpresa);
     }
 
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tblempleado", "id_empleado", 4);
+    }
+
     public ArrayList<Empleado> getListado() {
 
         c = new Conexion().getCon();

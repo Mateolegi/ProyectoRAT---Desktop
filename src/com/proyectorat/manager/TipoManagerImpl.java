@@ -25,6 +25,12 @@ public class TipoManagerImpl {
         return dao.getTipoA(c, idActividad, idEmpresa);
     }
 
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tbltipo_actividad", "id_actividad", 4);
+    }
+
     public ArrayList<Tipo> getListado() {
 
         c = new Conexion().getCon();
