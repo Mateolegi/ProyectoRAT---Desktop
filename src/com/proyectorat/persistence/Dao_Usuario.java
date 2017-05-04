@@ -78,7 +78,7 @@ public class Dao_Usuario {
                 res = "Usuario " + usu + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
-            
+            e.printStackTrace();
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
@@ -88,6 +88,8 @@ public class Dao_Usuario {
             try {
                 c.close();
             } catch (Exception e) {
+                res = "" + e.getCause();
+                e.printStackTrace();
             }
         }
         return res;

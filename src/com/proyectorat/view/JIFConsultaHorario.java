@@ -14,17 +14,17 @@ public class JIFConsultaHorario extends javax.swing.JInternalFrame {
     public JIFConsultaHorario() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        javax.swing.table.DefaultTableModel = new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nombre", "Tipo"
-            }
-        );
+//        javax.swing.table.DefaultTableModel = new javax.swing.table.DefaultTableModel(
+//            new Object [][] {
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null},
+//                {null, null, null, null}
+//            },
+//            new String [] {
+//                "ID", "Nombre", "Tipo"
+//            }
+//        );
     }
     
     private void cargarTabla() {

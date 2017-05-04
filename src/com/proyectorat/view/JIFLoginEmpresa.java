@@ -114,6 +114,7 @@ public class JIFLoginEmpresa extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La empresa no ha sido verificada", "¡Verifique la empresa!", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "La empresa no existe.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }

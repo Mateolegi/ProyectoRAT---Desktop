@@ -352,6 +352,7 @@ public class JIFRegistroEmpresa extends javax.swing.JInternalFrame {
         txtNomU.setText("");
         txtConU.setText("");
         txtCorU.setText("");
+        lblLogEVP.setIcon(null);
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -379,7 +380,7 @@ public class JIFRegistroEmpresa extends javax.swing.JInternalFrame {
             ne.getGuardarEmpresa(empresaVO);
 
             usuarioVO.setUsuario(usuU);
-            usuarioVO.setNombre(nomE);
+            usuarioVO.setNombre(nomU);
             usuarioVO.setClave(conUEncripted);
             usuarioVO.setPerfil("Administrador");
             usuarioVO.setEmail(corU);
